@@ -10,11 +10,12 @@ let minutes = 0;
 let seconds = 0;
 let milliseconds = 0;
 
-
 let startTime;
 let elapsedTime = 0;
 let timerId;
 let timeToadd = 0;
+let stoptime = true;
+
 
 function updateTimetText(){
   milliseconds++;
@@ -42,18 +43,22 @@ function countUp(){
 }
 
 start.addEventListener('click', function(){
-  startTime = Date.now();
-  countUp();
-});
+   if (stoptime == true) {
+   stoptime = false;
+   startTime == Date.now();  
+   countUp(); 
+   }
+  });  
 
 stop.addEventListener('click', function(){
-  clearTimeout(timerId);
-  timeToadd += Date.now() - startTime;
+   if (stoptime == false) {
+    stoptime = true;
+ 　  clearTimeout(timerId);
+    timeToadd += Date.now() - startTime;
+    }
 });
 
 reset.addEventListener('click', function(){
-  elapsedTime = 0;
-  timeToadd = 0;
   timer.innerHTML = "0:0:0:0";
   hours = 0;
   minutes = 0;
